@@ -1,0 +1,44 @@
+.grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.materialGrid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* 讓 #materials 捲動時不被固定 navbar 蓋住 */
+:global(#materials) {
+  scroll-margin-top: var(--nav-height);
+}
+
+.cta {
+  margin-top: var(--space-7);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+}
+
+.cta p {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+@media (max-width: 980px) {
+  .grid,
+  .materialGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .grid,
+  .materialGrid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# local env / secrets
+.env
+
+# local SQLite dev database
+*.db
+*.sqlite3
+
+# 上傳的詢價附件（Phase 5）
+uploads/

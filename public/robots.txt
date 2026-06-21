@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# 部署後請把下方換成實際網域。
+Sitemap: https://YOUR-DOMAIN.example/sitemap.xml

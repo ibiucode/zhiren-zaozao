@@ -1,0 +1,100 @@
+.intro {
+  max-width: 760px;
+}
+
+.intro p {
+  font-size: var(--fs-lg);
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* 製作流程 */
+.process {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-5);
+  counter-reset: step;
+}
+
+.step {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+}
+
+.stepNum {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xl);
+  color: var(--color-accent);
+  margin-bottom: var(--space-3);
+}
+
+.stepTitle {
+  font-size: var(--fs-lg);
+  margin-bottom: var(--space-2);
+}
+
+.stepDesc {
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  margin-bottom: 0;
+}
+
+/* 專業能力 */
+.capabilities {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+
+.capability {
+  position: relative;
+  padding: var(--space-4) var(--space-4) var(--space-4) var(--space-6);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-accent);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+}
+
+/* 品質承諾 */
+.promises {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.promise {
+  text-align: center;
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+}
+
+.promiseTitle {
+  font-size: var(--fs-xl);
+  color: var(--color-accent-2);
+}
+
+.promiseDesc {
+  color: var(--color-text-muted);
+  margin-bottom: 0;
+}
+
+/* RWD */
+@media (max-width: 980px) {
+  .process {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .promises {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .process,
+  .capabilities {
+    grid-template-columns: 1fr;
+  }
+}

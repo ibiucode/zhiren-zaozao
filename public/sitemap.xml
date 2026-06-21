@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  注意：前台使用 HashRouter，路由為 /#/services 形式，搜尋引擎多半只索引根 URL。
+  若未來改用 BrowserRouter（需伺服器端 SPA fallback），可在此列出各頁實際 URL。
+  部署後請將 YOUR-DOMAIN.example 換成實際網域。
+-->
+<urlset xmlns="http://www.sitemap.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://YOUR-DOMAIN.example/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>

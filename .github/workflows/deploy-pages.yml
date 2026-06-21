@@ -1,0 +1,65 @@
+name: Deploy frontend to GitHub Pages
+
+# 把「前台」build 到 dist/，「後台 admin」build 到 dist/admin/，一起部署到 GitHub Pages。
+#   前台： https://<user>.github.io/<repo>/
+#   後台： https://<user>.github.io/<repo>/admin/
+#
+# 設定（Repository → Settings）：
+#   - Pages：Source 選 "GitHub Actions"
+#   - Variables → VITE_API_BASE_URL：你的後端 API 網址（例如 Render 的 URL）
+#     未設定時前台會 fallback 到 mock 資料（仍可瀏覽，但無即時後端）。
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL }}
+      VITE_USE_MOCK: ${{ vars.VITE_API_BASE_URL && 'false' || 'true' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build public site
+        run: |
+          npm ci
+          npm run build
+
+      - name: Build admin into dist/admin
+        working-directory: admin
+        run: |
+          npm ci
+          npm run build
+          mkdir -p ../dist/admin
+          cp -r dist/. ../dist/admin/
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

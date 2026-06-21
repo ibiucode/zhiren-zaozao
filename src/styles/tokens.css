@@ -1,0 +1,74 @@
+/*
+ * 設計 token（全站單一來源）。
+ * 風格方向：黑灰工業風 + 橘色科技感 accent（藍色為次要 accent）。
+ * 所有顏色、間距、字級、圓角、陰影都集中在此，方便日後統一調整 / 套主題。
+ */
+:root {
+  /* 品牌色 */
+  --color-accent: #ff6a1a;          /* 主 accent：工業橘（熔絲/能量感） */
+  --color-accent-strong: #ff8442;   /* hover 用較亮橘 */
+  --color-accent-dim: rgba(255, 106, 26, 0.12);
+  --color-accent-2: #2f9bff;        /* 次要 accent：科技藍 */
+  --color-accent-2-dim: rgba(47, 155, 255, 0.12);
+
+  /* 中性色（黑灰底） */
+  --color-bg: #0d0e10;              /* 全站底色，近黑 */
+  --color-bg-alt: #111317;         /* 區塊交替底色 */
+  --color-surface: #16181d;        /* 卡片表面 */
+  --color-surface-2: #1c1f25;      /* 較亮表面 / hover */
+  --color-border: #2a2e36;         /* 邊框 */
+  --color-border-strong: #3a3f49;
+
+  /* 文字 */
+  --color-text: #eceef1;
+  --color-text-muted: #9aa1ab;
+  --color-text-dim: #6b727c;
+  --color-on-accent: #0d0e10;      /* 放在橘色按鈕上的深色文字 */
+
+  /* 狀態色 */
+  --color-success: #36c98d;
+  --color-danger: #ff5d5d;
+
+  /* 字體 */
+  --font-sans: "Segoe UI", "PingFang TC", "Microsoft JhengHei", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "SFMono-Regular", "JetBrains Mono", "Consolas", "Roboto Mono", monospace;
+
+  /* 字級 */
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-lg: 1.125rem;
+  --fs-xl: 1.375rem;
+  --fs-2xl: 1.75rem;
+  --fs-3xl: 2.25rem;
+  --fs-4xl: clamp(2.4rem, 6vw, 3.75rem);
+
+  /* 間距 */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+
+  /* 圓角 */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --radius-pill: 999px;
+
+  /* 陰影 */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --shadow-accent: 0 8px 30px rgba(255, 106, 26, 0.25);
+
+  /* 版面 */
+  --container-max: 1200px;
+  --nav-height: 68px;
+
+  /* 動態 */
+  --transition: 160ms ease;
+}

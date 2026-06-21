@@ -1,0 +1,12 @@
+.wrap {
+  max-width: 820px;
+}
+
+.more {
+  margin-top: var(--space-7);
+  text-align: center;
+}
+
+.more p {
+  color: var(--color-text-muted);
+}

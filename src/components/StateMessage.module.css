@@ -1,0 +1,17 @@
+.msg {
+  text-align: center;
+  padding: var(--space-7) var(--space-4);
+  color: var(--color-text-muted);
+  font-size: var(--fs-base);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.error {
+  color: var(--color-danger);
+  border-color: var(--color-danger);
+}
+
+.empty {
+  color: var(--color-text-dim);
+}

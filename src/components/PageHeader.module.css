@@ -1,0 +1,24 @@
+.header {
+  position: relative;
+  padding: var(--space-8) 0 var(--space-7);
+  background:
+    radial-gradient(circle at 15% 0%, rgba(255, 106, 26, 0.10), transparent 45%),
+    radial-gradient(circle at 85% 100%, rgba(47, 155, 255, 0.08), transparent 45%),
+    var(--color-bg-alt);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.inner {
+  max-width: 70ch;
+}
+
+.title {
+  font-size: var(--fs-4xl);
+  margin-bottom: var(--space-4);
+}
+
+.desc {
+  color: var(--color-text-muted);
+  font-size: var(--fs-lg);
+  margin-bottom: 0;
+}

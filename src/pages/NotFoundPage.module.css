@@ -1,0 +1,23 @@
+.wrap {
+  text-align: center;
+  padding: var(--space-9) 0;
+}
+
+.code {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: clamp(4rem, 14vw, 8rem);
+  font-weight: 800;
+  color: var(--color-accent);
+  line-height: 1;
+  margin-bottom: var(--space-4);
+}
+
+.title {
+  font-size: var(--fs-2xl);
+}
+
+.desc {
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-6);
+}
