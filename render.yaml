@@ -1,5 +1,6 @@
-# Render Blueprint（後端 FastAPI + PostgreSQL）。
-# 用法：Render Dashboard → New → Blueprint → 指向此檔（或 repo 根）。
+# Render Blueprint（後端 FastAPI + PostgreSQL）。此檔須位於 repo 根目錄（Render 只在根找 render.yaml）。
+# 服務程式碼在 backend/（見 rootDir）。
+# 用法：Render Dashboard → New → Blueprint → 連到此 repo（會自動讀到本檔）。
 #
 # 部署後請於 Service 的 Environment 補上：
 #   - ADMIN_PASSWORD（sync:false，需手動填）

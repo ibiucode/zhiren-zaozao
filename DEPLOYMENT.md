@@ -14,7 +14,7 @@
 
 ## 1. 後端（Render + PostgreSQL）
 
-已附 [backend/render.yaml](backend/render.yaml) Blueprint。
+已附 [render.yaml](render.yaml) Blueprint（位於 repo 根，服務程式碼在 `backend/`）。
 
 1. Render → New → **Blueprint** → 指向此 repo。會建立一個 Web Service + 一個 PostgreSQL。
 2. 在 Service 的 **Environment** 補上（render.yaml 標為 `sync:false` 的）：
