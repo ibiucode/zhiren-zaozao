@@ -15,19 +15,21 @@
 ## 1. 後端（Render + PostgreSQL）
 
 已附 [render.yaml](render.yaml) Blueprint（位於 repo 根，服務程式碼在 `backend/`）。
+本 blueprint **只建立 Web Service，不建立 DB**（Render 免費帳號限一個免費 DB）；
+資料庫採「外部 / 手動」，`DATABASE_URL` 由你填入。
 
-1. Render → New → **Blueprint** → 指向此 repo。會建立一個 Web Service + 一個 PostgreSQL。
-2. 在 Service 的 **Environment** 補上（render.yaml 標為 `sync:false` 的）：
+1. **準備一個 PostgreSQL 連線字串**，二擇一：
+   - **Neon（建議）**：到 [neon.tech](https://neon.tech) 開免費 DB，複製連線字串（不會 30 天到期）。
+   - **沿用現有 Render 免費 PostgreSQL**：到該 DB 的頁面複製 **Internal Database URL**。
+2. Render → New → **Blueprint** → 指向此 repo（建立 Web Service）。
+3. 在 Service 的 **Environment** 補上（`sync:false` 的）：
+   - `DATABASE_URL`：步驟 1 的連線字串（`postgres://` 開頭沒關係，會自動正規化）。
    - `ADMIN_PASSWORD`：管理員密碼（**務必設定強密碼**）。
-   - `CORS_ORIGINS`：前台與後台的網址，逗號分隔，例如
-     `https://<user>.github.io`（GitHub Pages 網域）。
-   - `JWT_SECRET` 由 Render 自動產生（`generateValue: true`），不需手動填。
-3. `ENVIRONMENT=production` 已設；若仍使用預設密鑰/密碼，**後端會拒絕啟動**（見〈安全強化〉）。
-4. 啟動指令：`uvicorn app.main:app --host 0.0.0.0 --port $PORT`（已在 blueprint）。
-   啟動時自動 `create_all` 建表並建立預設管理員。
-5. 首次若要灌入示範內容，可在 Render Shell 執行：`python -m app.db.seed`。
-
-> `DATABASE_URL`：Render 提供 `postgres://...`，後端會自動正規化為 `postgresql+psycopg2://...`。
+   - `CORS_ORIGINS`：前台與後台網址，例如 `https://<user>.github.io`。
+   - `JWT_SECRET` 由 Render 自動產生，不需手動填。
+4. `ENVIRONMENT=production` 已設；若仍使用預設密鑰/密碼，**後端會拒絕啟動**（見〈安全強化〉）。
+5. 啟動時自動 `create_all` 建表並建立預設管理員。首次若要灌入示範內容，
+   可在 Render Shell 執行：`python -m app.db.seed`。
 
 ### 手動部署（非 Blueprint）
 - Build：`pip install -r requirements.txt`

@@ -1,14 +1,18 @@
-# Render Blueprint（後端 FastAPI + PostgreSQL）。此檔須位於 repo 根目錄（Render 只在根找 render.yaml）。
+# Render Blueprint（後端 FastAPI）。此檔須位於 repo 根目錄（Render 只在根找 render.yaml）。
 # 服務程式碼在 backend/（見 rootDir）。
 # 用法：Render Dashboard → New → Blueprint → 連到此 repo（會自動讀到本檔）。
 #
-# 部署後請於 Service 的 Environment 補上：
-#   - ADMIN_PASSWORD（sync:false，需手動填）
-#   - CORS_ORIGINS（你的 GitHub Pages 前台 / 後台網址，逗號分隔）
+# 資料庫採「外部 / 手動」：本 blueprint 不建立 DB（Render 免費帳號只能有一個免費 DB）。
+# 部署時請於 Service 的 Environment 手動填入這些 sync:false 變數：
+#   - DATABASE_URL：PostgreSQL 連線字串。可用
+#       (a) 你現有的 Render 免費 PostgreSQL 的 Internal Database URL，或
+#       (b) 一個免費 Neon（neon.tech）DB 的連線字串（建議，不會 30 天到期）。
+#       postgres:// 開頭沒關係，程式會自動轉成 postgresql+psycopg2://。
+#   - ADMIN_PASSWORD：後台密碼（勿用預設）。
+#   - CORS_ORIGINS：前台 / 後台網址，例如 https://ibiucode.github.io
 # JWT_SECRET 由 Render 自動產生隨機值。
 #
-# 注意：Render 容器檔案系統為短暫性，uploads/ 不會永久保存；
-#       正式環境請改接物件儲存（S3 / GCS）。
+# 注意：Render 容器檔案系統為短暫性，uploads/ 不會永久保存；正式環境請改接物件儲存（S3 / GCS）。
 services:
   - type: web
     name: zhiren-zaozao-api
@@ -28,12 +32,6 @@ services:
       - key: ADMIN_PASSWORD
         sync: false
       - key: DATABASE_URL
-        fromDatabase:
-          name: zhiren-db
-          property: connectionString
+        sync: false
       - key: CORS_ORIGINS
         sync: false
-
-databases:
-  - name: zhiren-db
-    plan: free
