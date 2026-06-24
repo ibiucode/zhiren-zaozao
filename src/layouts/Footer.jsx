@@ -1,17 +1,27 @@
 import { Link } from 'react-router-dom'
-import { siteSettings, contactSettings } from '../data/siteSettings.js'
+import { useAsyncData } from '../lib/useAsyncData.js'
+import { getSiteSettings } from '../services/contentService.js'
+import {
+  siteSettings as fallbackSite,
+  contactSettings as fallbackContact,
+} from '../data/siteSettings.js'
 import styles from './Footer.module.css'
 
 export default function Footer() {
+  // 由 API 取得網站 / 聯絡設定（後台可改）；載入前先用 src/data 當 fallback，避免閃爍。
+  const { data } = useAsyncData(getSiteSettings, [])
+  const site = data || fallbackSite
+  const contact = data?.contact || fallbackContact
+
   return (
     <footer className={styles.footer}>
       <div className={`container ${styles.inner}`}>
         <div className={styles.col}>
           <div className={styles.brand}>
             <span className={styles.brandMark}>3D</span>
-            <span>{siteSettings.siteName}</span>
+            <span>{site.siteName}</span>
           </div>
-          <p className={styles.muted}>{siteSettings.tagline}</p>
+          <p className={styles.muted}>{site.tagline}</p>
         </div>
 
         <div className={styles.col}>
@@ -28,17 +38,17 @@ export default function Footer() {
         <div className={styles.col}>
           <h4 className={styles.heading}>聯絡我們</h4>
           <ul className={styles.contact}>
-            <li>{contactSettings.email}</li>
-            <li>{contactSettings.phone}</li>
-            <li>LINE：{contactSettings.lineId}</li>
-            <li>{contactSettings.address}</li>
+            <li>{contact.email}</li>
+            <li>{contact.phone}</li>
+            <li>LINE：{contact.lineId}</li>
+            <li>{contact.address}</li>
           </ul>
           <Link to="/contact" className={styles.cta}>立即詢價</Link>
         </div>
       </div>
 
       <div className={styles.bottom}>
-        <div className="container">{siteSettings.footerText}</div>
+        <div className="container">{site.footerText}</div>
       </div>
     </footer>
   )
