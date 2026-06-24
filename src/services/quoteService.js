@@ -9,7 +9,7 @@ async function postFile(path, file) {
   const fd = new FormData()
   fd.append('file', file)
   // 不要手動設 Content-Type，讓瀏覽器帶上 multipart boundary。
-  const res = await fetch(`${BASE}${path}`, { method: 'POST', body: fd })
+  const res = await fetch(`${BASE}${path}`, { method: 'POST', body: fd, cache: 'no-store' })
   if (!res.ok) {
     let detail
     try {

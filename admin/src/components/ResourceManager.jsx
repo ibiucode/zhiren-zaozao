@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import Field from './Field.jsx'
+import { useToast } from './Toast.jsx'
 import {
   createResource,
   deleteResource,
@@ -13,6 +14,7 @@ import { defaultFormValue, displayCell, toApiValue, toFormValue } from '../lib/f
  * @param {{ config: { label, endpoint, columns, fields } }} props
  */
 export default function ResourceManager({ config }) {
+  const toast = useToast()
   const [items, setItems] = useState([])
   const [status, setStatus] = useState('loading') // loading | ready | error
   const [error, setError] = useState('')
@@ -74,18 +76,21 @@ export default function ResourceManager({ config }) {
       payload[f.name] = toApiValue(f, editing.form[f.name])
     })
 
+    const isNew = editing.mode === 'new'
     setSaving(true)
     setFormError('')
     try {
-      if (editing.mode === 'new') {
+      if (isNew) {
         await createResource(config.endpoint, payload)
       } else {
         await updateResource(config.endpoint, editing.id, payload)
       }
       setEditing(null)
       await load()
+      toast.success(isNew ? '已新增' : '已儲存')
     } catch (e) {
       setFormError(e.message)
+      toast.error(`儲存失敗：${e.message}`)
     } finally {
       setSaving(false)
     }
@@ -96,8 +101,10 @@ export default function ResourceManager({ config }) {
     try {
       await deleteResource(config.endpoint, item.id)
       await load()
+      toast.success('已刪除')
     } catch (e) {
       setError(e.message)
+      toast.error(`刪除失敗：${e.message}`)
     }
   }
 

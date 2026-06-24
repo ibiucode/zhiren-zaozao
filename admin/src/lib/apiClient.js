@@ -27,6 +27,7 @@ export async function apiRequest(path, { method = 'GET', body, auth = true } = {
     method,
     headers,
     body: body != null ? JSON.stringify(body) : undefined,
+    cache: 'no-store', // 後台永遠抓最新資料
   })
 
   if (res.status === 401) {

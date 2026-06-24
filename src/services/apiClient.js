@@ -34,6 +34,7 @@ export function mockResponse(data, delay = 150) {
 export async function apiRequest(path, options = {}) {
   const url = `${API_BASE_URL}${path}`
   const res = await fetch(url, {
+    cache: 'no-store', // 動態內容，永遠抓最新（避免後台改了前台沒更新）
     headers: { 'Content-Type': 'application/json', ...(options.headers || {}) },
     ...options,
   })

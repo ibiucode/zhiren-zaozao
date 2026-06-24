@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useToast } from '../components/Toast.jsx'
 import { getSiteSettings, patchContactSettings, patchSiteSettings } from '../services/adminApi.js'
 
 // social 以「id | label | url」多行編輯。
@@ -15,6 +16,7 @@ const textToSocial = (text) =>
     })
 
 export default function SettingsPage() {
+  const toast = useToast()
   const [site, setSite] = useState(null)
   const [contact, setContact] = useState(null)
   const [socialText, setSocialText] = useState('')
@@ -54,8 +56,10 @@ export default function SettingsPage() {
         social: textToSocial(socialText),
       })
       flash('網站設定已儲存')
+      toast.success('網站設定已儲存')
     } catch (e) {
       setErr(e.message)
+      toast.error(`儲存失敗：${e.message}`)
     }
   }
 
@@ -69,8 +73,10 @@ export default function SettingsPage() {
         businessHours: contact.businessHours,
       })
       flash('聯絡資訊已儲存')
+      toast.success('聯絡資訊已儲存')
     } catch (e) {
       setErr(e.message)
+      toast.error(`儲存失敗：${e.message}`)
     }
   }
 

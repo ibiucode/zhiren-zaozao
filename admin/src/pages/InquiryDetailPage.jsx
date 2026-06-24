@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import StatusBadge from '../components/StatusBadge.jsx'
+import { useToast } from '../components/Toast.jsx'
 import { downloadInquiryFile, getInquiry, updateInquiry } from '../services/adminApi.js'
 import { INQUIRY_STATUSES } from '../config/inquiries.js'
 import { formatDateTime } from '../lib/formUtils.js'
@@ -28,6 +29,7 @@ function formatSize(bytes) {
 }
 
 export default function InquiryDetailPage() {
+  const toast = useToast()
   const { id } = useParams()
   const [item, setItem] = useState(null)
   const [status, setStatus] = useState('loading')
@@ -67,8 +69,10 @@ export default function InquiryDetailPage() {
       setItem(updated)
       setMsg('已儲存')
       setTimeout(() => setMsg(''), 2500)
+      toast.success('已儲存')
     } catch (e) {
       setError(e.message)
+      toast.error(`儲存失敗：${e.message}`)
     } finally {
       setSaving(false)
     }
