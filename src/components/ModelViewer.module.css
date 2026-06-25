@@ -1,0 +1,61 @@
+.viewer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: #121419;
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+}
+
+/* 尺寸讀數面板（mm） */
+.dims {
+  position: absolute;
+  top: var(--space-3);
+  left: var(--space-3);
+  display: flex;
+  gap: var(--space-3);
+  align-items: baseline;
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--color-text);
+  background: rgba(13, 14, 16, 0.72);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-3);
+  pointer-events: none;
+}
+.dims b { color: var(--color-accent); margin-right: 3px; }
+.dims .unit { color: var(--color-text-dim); font-size: var(--fs-xs); }
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-5);
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  background: rgba(18, 20, 25, 0.6);
+}
+
+.hint {
+  position: absolute;
+  bottom: var(--space-3);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: var(--fs-xs);
+  color: var(--color-text-dim);
+  background: rgba(13, 14, 16, 0.6);
+  padding: 2px var(--space-3);
+  border-radius: var(--radius-pill);
+  pointer-events: none;
+}

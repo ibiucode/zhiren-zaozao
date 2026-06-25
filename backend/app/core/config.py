@@ -38,7 +38,8 @@ class Settings(BaseSettings):
 
     # --- 檔案上傳 / 估價（Phase 5）---
     upload_dir: str = "./uploads"
-    max_upload_mb: int = 50
+    # 線上上傳上限 100MB（>100MB 由前端導向人工，不會送到後端）。
+    max_upload_mb: int = 100
     allowed_file_formats: str = "stl,obj,step,stp"
     # 任一軸超過此尺寸（mm）會提出警告（常見桌上型列印範圍）。
     max_print_dimension_mm: float = 300.0

@@ -1,53 +1,70 @@
 /**
  * 3D 檔案檢查邏輯（client 端）。
  *
- * 分工（Phase 5 後）：
- * - 本模組：client 端的「淺層」檢查（副檔名、大小），送出前先擋掉明顯錯誤。
- * - 真正的網格分析（尺寸、破面、三角面數）在 backend，由 `src/services/quoteService.js`
- *   的 checkFile() 呼叫 POST /api/quote/check-file 完成（重運算放後端）。
+ * 分工：
+ * - 本模組：client 端的格式 / 大小「分級」判斷（送出前先擋）。
+ * - 深層網格分析（破面、尺寸）在 backend，由 `src/services/quoteService.js` 的 checkFile() 完成。
+ * - 3D 預覽（解析幾何）在 `src/lib/modelLoader.js`，純前端。
+ *
+ * 大小分級（避免塞爆 + 免費後端限制）：
+ * - ≤ 100MB：可預覽、可線上上傳。
+ * - 100–500MB：可預覽，但不可線上上傳 → 導向 LINE / email 由專人處理。
+ * - > 500MB：不預覽、不上傳 → 同樣導向人工。
  *
  * 此模組為純函式，不得 import React。
  */
 
-/** 規劃支援的 3D 檔案格式。 */
 export const ACCEPTED_FILE_FORMATS = ['stl', 'obj', 'step', 'stp']
 
-/** 規劃的單檔大小上限（bytes），此處先以 50MB 為佔位值。 */
-export const MAX_FILE_SIZE_BYTES = 50 * 1024 * 1024
+export const UPLOAD_MAX_BYTES = 100 * 1024 * 1024 // 100MB：線上上傳上限
+export const PREVIEW_MAX_BYTES = 500 * 1024 * 1024 // 500MB：可預覽上限
 
-/**
- * 取得副檔名（小寫）。
- * @param {string} filename
- * @returns {string}
- */
+/** 取得副檔名（小寫）。 */
 export function getFileExtension(filename = '') {
   const idx = filename.lastIndexOf('.')
   return idx >= 0 ? filename.slice(idx + 1).toLowerCase() : ''
 }
 
-/**
- * 基本檔案檢查（僅格式與大小的淺層檢查；不做網格分析）。
- * 用於送出前的 client 端預檢；通過後再交給 backend 做網格分析。
- * @param {{ name: string, size: number }} file
- * @returns {{ valid: boolean, errors: string[] }}
- */
-export function validateFileBasic(file) {
-  const errors = []
-  if (!file) {
-    return { valid: false, errors: ['未提供檔案'] }
-  }
-  const ext = getFileExtension(file.name)
-  if (!ACCEPTED_FILE_FORMATS.includes(ext)) {
-    errors.push(`不支援的格式：.${ext || '未知'}`)
-  }
-  if (typeof file.size === 'number' && file.size > MAX_FILE_SIZE_BYTES) {
-    errors.push('檔案超過大小上限')
-  }
-  return { valid: errors.length === 0, errors }
+export function formatBytes(bytes) {
+  if (bytes == null) return '—'
+  if (bytes < 1024) return `${bytes} B`
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`
+  if (bytes < 1024 * 1024 * 1024) return `${(bytes / 1024 / 1024).toFixed(1)} MB`
+  return `${(bytes / 1024 / 1024 / 1024).toFixed(2)} GB`
 }
 
 /**
- * 深層網格分析（破面 / 尺寸 / 三角面數）。
- * 已於 Phase 5 實作於 backend；前端請改用 `src/services/quoteService.js` 的 checkFile()。
- * 壁厚分析與自動估價核心仍為未來工作。
+ * 對單一檔案做分級判斷。
+ * @param {File} file
+ * @returns {{
+ *   ext: string, formatOk: boolean,
+ *   sizeTier: 'ok' | 'preview-only' | 'too-big',
+ *   canPreview: boolean, canUpload: boolean,
+ *   error: string | null,
+ * }}
  */
+export function classifyFile(file) {
+  const ext = getFileExtension(file?.name)
+  const formatOk = ACCEPTED_FILE_FORMATS.includes(ext)
+  const size = file?.size ?? 0
+
+  let sizeTier = 'ok'
+  if (size > PREVIEW_MAX_BYTES) sizeTier = 'too-big'
+  else if (size > UPLOAD_MAX_BYTES) sizeTier = 'preview-only'
+
+  let error = null
+  if (!formatOk) {
+    error = `不支援的格式：.${ext || '未知'}（僅支援 ${ACCEPTED_FILE_FORMATS.join(' / ').toUpperCase()}）`
+  } else if (sizeTier === 'too-big') {
+    error = `檔案 ${formatBytes(size)} 超過 ${formatBytes(PREVIEW_MAX_BYTES)}，無法線上處理。`
+  }
+
+  return {
+    ext,
+    formatOk,
+    sizeTier,
+    canPreview: formatOk && sizeTier !== 'too-big',
+    canUpload: formatOk && sizeTier === 'ok',
+    error,
+  }
+}
