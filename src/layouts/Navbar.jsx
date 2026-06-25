@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { NavLink, Link } from 'react-router-dom'
-import { siteSettings } from '../data/siteSettings.js'
+import { useAsyncData } from '../lib/useAsyncData.js'
+import { getSiteSettings } from '../services/contentService.js'
+import { siteSettings as fallbackSite } from '../data/siteSettings.js'
 import styles from './Navbar.module.css'
 
 // 導覽列項目（路由設定，與 App.jsx 的 route 對應）。
@@ -17,12 +19,16 @@ export default function Navbar() {
   const [open, setOpen] = useState(false)
   const close = () => setOpen(false)
 
+  // 品牌名稱由後台設定（API）取得；載入前用 src/data 當 fallback。
+  const { data } = useAsyncData(getSiteSettings, [])
+  const siteName = data?.siteName || fallbackSite.siteName
+
   return (
     <header className={styles.header}>
       <div className={`container ${styles.inner}`}>
         <Link to="/" className={styles.brand} onClick={close}>
           <span className={styles.brandMark}>3D</span>
-          <span className={styles.brandName}>{siteSettings.siteName}</span>
+          <span className={styles.brandName}>{siteName}</span>
         </Link>
 
         <button
