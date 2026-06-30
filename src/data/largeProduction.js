@@ -39,12 +39,10 @@ export const caseTypes = [
   '教學 / 展示用模型',
 ]
 
-// 首頁「大型製作的關鍵流程／特點」區塊（取代原「為什麼選擇」）
+// 首頁「大型製作能力」亮點區塊（精簡 3～4 點；完整流程在 /large-production）
 export const homeHighlights = [
-  { id: 'local', title: '台灣本地製作', desc: '在地溝通、調整與交付，縮短來回時間。' },
-  { id: 'splitting', title: '大型件拆件規劃', desc: '依尺寸與結構分件，兼顧強度與組裝。' },
-  { id: 'structure', title: '本體列印與結構處理', desc: '處理大型本體列印與內部支撐結構。' },
-  { id: 'base', title: '底座訂製', desc: '依展示需求設計底座與承載結構。' },
-  { id: 'surface', title: '表面處理與烤漆上色', desc: '從毛胚整理到上色，貼近展示用途。' },
-  { id: 'material', title: '材料與工法建議', desc: '依用途與預算建議合適的材料與製程。' },
+  { id: 'local', title: '台灣本地製作' },
+  { id: 'splitting', title: '大型件拆件規劃' },
+  { id: 'assembly', title: '本體列印與組裝測試' },
+  { id: 'finishing', title: '底座與表面處理' },
 ]

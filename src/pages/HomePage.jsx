@@ -15,7 +15,7 @@ import styles from './HomePage.module.css'
 export default function HomePage() {
   useSeo({
     description:
-      '職人自造提供大型列印製作、模型拆件與組裝規劃、工程原型打樣，以及底座與表面處理。',
+      '職人自造提供 FDM 工程打樣、SLA 高精度樣品、大型製作、模型拆件與組裝，以及底座與表面處理。',
   })
   const { data: services } = useAsyncData(getServices, [])
   const { data: portfolio } = useAsyncData(getPortfolio, [])
@@ -32,7 +32,7 @@ export default function HomePage() {
             <span className="eyebrow">Our Expertise</span>
             <h1 className={styles.expertiseTitle}>我們的專業</h1>
             <p className={styles.expertiseSub}>
-              大型列印製作｜拆件與組裝規劃｜工程原型打樣｜底座與表面處理
+              大型製作｜工程打樣｜高精度樣品｜拆件與後處理
             </p>
           </div>
 
@@ -43,31 +43,29 @@ export default function HomePage() {
           </div>
 
           <div className={styles.expertiseCta}>
-            <Button to="/large-production" size="lg">查看大型製作服務</Button>
+            <Button to="/services" size="lg">了解服務項目</Button>
             <Button to="/contact" size="lg" variant="outline">聯絡我們</Button>
           </div>
         </div>
       </section>
 
-      {/* 大型製作的關鍵流程／特點（取代「為什麼選擇」） */}
+      {/* 大型製作亮點（精簡入口，非首頁主軸） */}
       <section className="section section--alt">
         <div className="container">
-          <SectionHeading
-            eyebrow="Large-format"
-            title="大型製作的關鍵流程"
-            subtitle="從拆件、本體列印到底座與表面處理，依結構與交付需求規劃製程。"
-            align="center"
-          />
-          <div className={`grid ${styles.highlightGrid}`}>
-            {homeHighlights.map((h) => (
-              <div key={h.id} className={styles.highlight}>
-                <h3 className={styles.highlightTitle}>{h.title}</h3>
-                <p className={styles.highlightDesc}>{h.desc}</p>
-              </div>
-            ))}
-          </div>
-          <div className={styles.moreLink}>
-            <Link to="/large-production">了解大型製作 →</Link>
+          <div className={styles.lpBand}>
+            <div className={styles.lpText}>
+              <span className="eyebrow">Large-format</span>
+              <h2 className={styles.lpTitle}>大型製作能力</h2>
+              <p className={styles.lpDesc}>
+                針對大型展示件、活動道具與工程原型，提供本體列印、拆件規劃、底座訂製與表面處理等製作支援。
+              </p>
+              <Button to="/large-production">查看大型製作</Button>
+            </div>
+            <ul className={styles.lpPoints}>
+              {homeHighlights.map((h) => (
+                <li key={h.id} className={styles.lpPoint}>{h.title}</li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>

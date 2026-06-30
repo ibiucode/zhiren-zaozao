@@ -1,46 +1,45 @@
 /**
  * 首頁「我們的專業」能力卡（前端靜態內容；非 CMS，不動 schema）。
+ * 平衡呈現整體服務，不偏單一項目。
  * imageUrl 預留：未來填入圖片 URL 即可自動替換 placeholder。
- * to：與大型製作最相關的卡片可點擊導向 /large-production。
+ * to：僅「大型製作」導向 /large-production（其餘不連結，避免首頁過度集中）。
  */
 export const capabilities = [
   {
-    id: 'large-print',
-    title: '大型列印製作',
-    desc: '適合大型展示件、商業道具與結構本體製作，依尺寸與用途規劃列印方式。',
+    id: 'large-production',
+    title: '大型製作',
+    desc: '大型展示件、活動道具與結構本體製作，依尺寸與用途規劃製程。',
     imageUrl: null,
     to: '/large-production',
   },
   {
-    id: 'part-splitting',
-    title: '模型拆件規劃',
-    desc: '依尺寸、接縫、強度與後處理需求進行分件，降低製作與組裝風險。',
-    imageUrl: null,
-    to: '/large-production',
-  },
-  {
-    id: 'prototyping',
-    title: '工程原型打樣',
-    desc: '協助設計驗證、功能測試與小量試作，讓概念更快進入實體檢查。',
+    id: 'fdm-prototyping',
+    title: 'FDM 工程打樣',
+    desc: '功能件與結構件的快速打樣，適合設計驗證與組裝測試。',
     imageUrl: null,
   },
   {
-    id: 'base-display',
-    title: '底座展示整合',
-    desc: '可依展示需求規劃底座、支撐結構與組裝方式，提升成品穩定性。',
+    id: 'sla-precision',
+    title: 'SLA 高精度樣品',
+    desc: '高細節光固化樣品，適合外觀件、公仔與精密模型。',
     imageUrl: null,
-    to: '/large-production',
+  },
+  {
+    id: 'split-assembly',
+    title: '模型拆件與組裝',
+    desc: '依尺寸、接縫與強度拆件，規劃組裝與後處理流程。',
+    imageUrl: null,
   },
   {
     id: 'finishing',
-    title: '毛胚整理與表面處理',
-    desc: '從列印完成後的毛胚檢查、接縫修整到上色前處理，保留後製彈性。',
+    title: '底座與表面處理',
+    desc: '底座訂製、毛胚整理與表面處理，提升成品完成度。',
     imageUrl: null,
   },
   {
-    id: 'painting',
-    title: '烤漆上色加值',
-    desc: '依展示需求進行底漆、噴塗與局部上色，使模型更接近展示用途。',
+    id: 'small-batch',
+    title: '小量客製製作',
+    desc: '小批量客製與重複件製作，依需求調整數量與工法。',
     imageUrl: null,
   },
 ]
