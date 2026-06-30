@@ -1,0 +1,109 @@
+.serviceGrid {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* 關鍵流程 */
+.process {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-5);
+}
+
+.step {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+}
+
+.stepNum {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xl);
+  color: var(--color-accent);
+  margin-bottom: var(--space-3);
+}
+
+.stepTitle {
+  font-size: var(--fs-lg);
+  margin-bottom: var(--space-2);
+}
+
+.stepDesc {
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  margin-bottom: 0;
+}
+
+/* 適合案件 */
+.cases {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+}
+
+.case {
+  padding: var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-accent-2);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+/* CTA */
+.cta {
+  background:
+    linear-gradient(135deg, rgba(255, 106, 26, 0.12), rgba(47, 155, 255, 0.08)),
+    var(--color-bg-alt);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.ctaInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  padding: var(--space-8) var(--space-5);
+}
+
+.ctaTitle {
+  font-size: var(--fs-2xl);
+  margin-bottom: var(--space-2);
+}
+
+.ctaDesc {
+  color: var(--color-text-muted);
+  margin-bottom: 0;
+  max-width: 50ch;
+}
+
+/* RWD */
+@media (max-width: 980px) {
+  .serviceGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .process {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .cases {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  .ctaInner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 560px) {
+  .serviceGrid,
+  .process,
+  .cases {
+    grid-template-columns: 1fr;
+  }
+}

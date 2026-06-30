@@ -8,6 +8,7 @@ import styles from './Navbar.module.css'
 // 導覽列項目（路由設定，與 App.jsx 的 route 對應）。
 const navItems = [
   { to: '/', label: '首頁', end: true },
+  { to: '/large-production', label: '大型製作' },
   { to: '/services', label: '服務' },
   { to: '/gallery', label: '作品' },
   { to: '/news', label: '最新消息' },
