@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import PageHeader from '../components/PageHeader.jsx'
 import Button from '../components/Button.jsx'
 import StateMessage from '../components/StateMessage.jsx'
@@ -29,7 +30,12 @@ export default function ContactPage() {
   const { data: materials } = useAsyncData(getMaterials, [])
   const { data: site } = useAsyncData(getSiteSettings, [])
 
-  const [form, setForm] = useState(EMPTY_FORM)
+  // 支援從作品詳情頁帶入 ?service=xxx 預填服務類型
+  const [searchParams] = useSearchParams()
+  const [form, setForm] = useState(() => ({
+    ...EMPTY_FORM,
+    serviceType: searchParams.get('service') || '',
+  }))
   const [status, setStatus] = useState('idle') // idle | submitting | success | error
   const [uploadWarning, setUploadWarning] = useState('')
 

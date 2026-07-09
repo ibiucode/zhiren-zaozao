@@ -6,11 +6,21 @@
   display: flex;
   flex-direction: column;
   transition: border-color var(--transition), transform var(--transition);
+  /* 卡片本身是 <Link>：中和全域 a 樣式 */
+  color: var(--color-text);
 }
 
 .card:hover {
   border-color: var(--color-accent-2);
   transform: translateY(-3px);
+  color: var(--color-text);
+}
+
+.readMore {
+  margin-top: var(--space-3);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-accent-2);
 }
 
 .body {

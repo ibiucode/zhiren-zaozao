@@ -1,0 +1,136 @@
+.crumb {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-sm);
+  color: var(--color-text-dim);
+  margin-bottom: var(--space-5);
+}
+
+.crumbSep {
+  color: var(--color-text-dim);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: var(--space-7);
+  align-items: start;
+}
+
+/* --- 圖片區 --- */
+.mainImg {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.thumbs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.thumb {
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: none;
+  cursor: pointer;
+  transition: border-color var(--transition);
+}
+
+.thumb:hover {
+  border-color: var(--color-border-strong);
+}
+
+.thumbActive {
+  border-color: var(--color-accent);
+}
+
+/* --- 資訊區 --- */
+.badge {
+  display: inline-block;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  padding: 2px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent-2-dim);
+  color: var(--color-accent-2);
+  margin-bottom: var(--space-3);
+}
+
+.title {
+  font-size: var(--fs-3xl);
+  margin-bottom: var(--space-3);
+}
+
+.desc {
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-5);
+}
+
+.meta {
+  margin: 0 0 var(--space-6);
+  border-top: 1px solid var(--color-border);
+}
+
+.metaRow {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-border);
+  font-size: var(--fs-sm);
+}
+
+.metaRow dt {
+  color: var(--color-text-dim);
+  flex-shrink: 0;
+}
+
+.metaRow dd {
+  margin: 0;
+  text-align: right;
+  font-weight: 600;
+}
+
+.cta {
+  width: 100%;
+}
+
+/* --- 相關作品 --- */
+.related {
+  margin-top: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-border);
+}
+
+.relatedTitle {
+  font-size: var(--fs-xl);
+  margin-bottom: var(--space-5);
+}
+
+.relatedGrid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.notFound {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+/* --- RWD --- */
+@media (max-width: 860px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+  .relatedGrid {
+    grid-template-columns: 1fr;
+  }
+}

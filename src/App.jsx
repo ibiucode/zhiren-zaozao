@@ -8,7 +8,9 @@ const HomePage = lazy(() => import('./pages/HomePage.jsx'))
 const LargeProductionPage = lazy(() => import('./pages/LargeProductionPage.jsx'))
 const ServicesPage = lazy(() => import('./pages/ServicesPage.jsx'))
 const GalleryPage = lazy(() => import('./pages/GalleryPage.jsx'))
+const PortfolioDetailPage = lazy(() => import('./pages/PortfolioDetailPage.jsx'))
 const NewsPage = lazy(() => import('./pages/NewsPage.jsx'))
+const NewsDetailPage = lazy(() => import('./pages/NewsDetailPage.jsx'))
 const FaqPage = lazy(() => import('./pages/FaqPage.jsx'))
 const AboutPage = lazy(() => import('./pages/AboutPage.jsx'))
 const ContactPage = lazy(() => import('./pages/ContactPage.jsx'))
@@ -22,7 +24,9 @@ export default function App() {
         <Route path="large-production" element={<LargeProductionPage />} />
         <Route path="services" element={<ServicesPage />} />
         <Route path="gallery" element={<GalleryPage />} />
+        <Route path="gallery/:id" element={<PortfolioDetailPage />} />
         <Route path="news" element={<NewsPage />} />
+        <Route path="news/:id" element={<NewsDetailPage />} />
         <Route path="faq" element={<FaqPage />} />
         <Route path="about" element={<AboutPage />} />
         <Route path="contact" element={<ContactPage />} />

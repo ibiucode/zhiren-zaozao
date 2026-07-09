@@ -1,13 +1,19 @@
+import MediaImage from './MediaImage.jsx'
 import styles from './MaterialCard.module.css'
 
 /**
- * 材料卡片（純 UI）。
+ * 材料卡片（純 UI）。後台有填 image URL 時才顯示圖片區，否則維持純文字版。
  * @param {{ material: Material }} props
  */
 export default function MaterialCard({ material }) {
-  const { name, description, colorOptions = [], properties = {} } = material
+  const { name, description, colorOptions = [], properties = {}, image } = material
   return (
     <article className={styles.card}>
+      {image && (
+        <div className={styles.media}>
+          <MediaImage url={image} alt={name} ratio="16/9" label={name} icon="◆" />
+        </div>
+      )}
       <h3 className={styles.title}>{name}</h3>
       <p className={styles.desc}>{description}</p>
 

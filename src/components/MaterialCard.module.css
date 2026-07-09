@@ -8,6 +8,12 @@
   flex-direction: column;
 }
 
+.media {
+  margin: calc(var(--space-5) * -1) calc(var(--space-5) * -1) var(--space-4);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  overflow: hidden;
+}
+
 .title {
   font-size: var(--fs-xl);
   color: var(--color-accent);
