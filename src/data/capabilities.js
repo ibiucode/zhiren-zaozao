@@ -2,7 +2,7 @@
  * 首頁「我們的專業」能力卡（前端靜態內容；非 CMS，不動 schema）。
  * 平衡呈現整體服務，不偏單一項目。
  * imageUrl 預留：未來填入圖片 URL 即可自動替換 placeholder。
- * to：僅「大型製作」導向 /large-production（其餘不連結，避免首頁過度集中）。
+ * to：各卡導向自己的專頁（大型製作 / FDM / SLA），避免全部集中到同一頁。
  */
 export const capabilities = [
   {
@@ -17,12 +17,14 @@ export const capabilities = [
     title: 'FDM 工程打樣',
     desc: '功能件與結構件的快速打樣，適合設計驗證與組裝測試。',
     imageUrl: null,
+    to: '/services/fdm',
   },
   {
     id: 'sla-precision',
     title: 'SLA 高精度樣品',
     desc: '高細節光固化樣品，適合外觀件、公仔與精密模型。',
     imageUrl: null,
+    to: '/services/sla',
   },
   {
     id: 'split-assembly',

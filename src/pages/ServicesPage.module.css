@@ -1,3 +1,22 @@
+.techLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+.techLink {
+  padding: var(--space-2) var(--space-5);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+}
+
+.techLink:hover {
+  background: var(--color-accent-dim);
+}
+
 .grid {
   grid-template-columns: repeat(3, 1fr);
 }

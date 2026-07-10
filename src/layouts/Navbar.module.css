@@ -86,6 +86,83 @@
   background: var(--color-accent);
 }
 
+/* --- 服務下拉 --- */
+.dropWrap {
+  position: relative;
+}
+
+.dropBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.caret {
+  font-size: 0.7em;
+  transition: transform var(--transition);
+}
+
+.caretOpen {
+  transform: rotate(180deg);
+}
+
+.dropMenu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 160px;
+  padding: var(--space-2);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  z-index: 60;
+}
+
+.dropMenuOpen {
+  display: block;
+}
+
+.dropLink {
+  display: block;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.dropLink:hover {
+  background: var(--color-surface-2);
+  color: var(--color-text);
+}
+
+.dropLinkActive {
+  color: var(--color-accent);
+}
+
+@media (min-width: 861px) {
+  /* 桌機 hover 直接展開；按鈕與選單間的空隙用偽元素墊住避免中途關閉 */
+  .dropWrap:hover .dropMenu {
+    display: block;
+  }
+  .dropWrap::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    height: 12px;
+  }
+}
+
 .cta {
   display: inline-block;
   padding: var(--space-2) var(--space-5);
@@ -160,6 +237,7 @@
 
   .navOpen {
     max-height: 80vh;
+    overflow-y: auto;
   }
 
   .navList {
@@ -178,6 +256,40 @@
 
   .navLinkActive::after {
     display: none;
+  }
+
+  /* 服務下拉在手機版變成手風琴 */
+  .dropWrap {
+    position: static;
+  }
+
+  .dropBtn {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+  }
+
+  .dropMenu {
+    position: static;
+    transform: none;
+    min-width: 0;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    padding: 0 0 0 var(--space-4);
+  }
+
+  .dropLink {
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--color-border);
+    border-radius: 0;
+    font-size: var(--fs-base);
+  }
+
+  .dropLink:hover {
+    background: transparent;
   }
 
   .cta {

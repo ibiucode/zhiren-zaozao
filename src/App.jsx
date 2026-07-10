@@ -7,6 +7,7 @@ import MainLayout from './layouts/MainLayout.jsx'
 const HomePage = lazy(() => import('./pages/HomePage.jsx'))
 const LargeProductionPage = lazy(() => import('./pages/LargeProductionPage.jsx'))
 const ServicesPage = lazy(() => import('./pages/ServicesPage.jsx'))
+const TechServicePage = lazy(() => import('./pages/TechServicePage.jsx'))
 const GalleryPage = lazy(() => import('./pages/GalleryPage.jsx'))
 const PortfolioDetailPage = lazy(() => import('./pages/PortfolioDetailPage.jsx'))
 const NewsPage = lazy(() => import('./pages/NewsPage.jsx'))
@@ -23,6 +24,7 @@ export default function App() {
         <Route index element={<HomePage />} />
         <Route path="large-production" element={<LargeProductionPage />} />
         <Route path="services" element={<ServicesPage />} />
+        <Route path="services/:tech" element={<TechServicePage />} />
         <Route path="gallery" element={<GalleryPage />} />
         <Route path="gallery/:id" element={<PortfolioDetailPage />} />
         <Route path="news" element={<NewsPage />} />

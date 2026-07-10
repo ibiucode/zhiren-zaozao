@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import PageHeader from '../components/PageHeader.jsx'
 import SectionHeading from '../components/SectionHeading.jsx'
 import ServiceCard from '../components/ServiceCard.jsx'
@@ -19,10 +19,13 @@ export default function ServicesPage() {
   const { hash } = useLocation()
 
   // 支援由「材料介紹入口」帶 #materials 進來時自動捲動到材料區。
+  // 延遲一拍再捲：避開 mount 期間其他捲動（回頂）互相取消的競態。
   useEffect(() => {
-    if (hash === '#materials') {
+    if (hash !== '#materials') return
+    const t = setTimeout(() => {
       document.getElementById('materials')?.scrollIntoView({ behavior: 'smooth' })
-    }
+    }, 120)
+    return () => clearTimeout(t)
   }, [hash, materials])
 
   return (
@@ -35,6 +38,10 @@ export default function ServicesPage() {
 
       <section className="section">
         <div className="container">
+          <div className={styles.techLinks}>
+            <Link to="/services/fdm" className={styles.techLink}>深入了解 FDM 服務 →</Link>
+            <Link to="/services/sla" className={styles.techLink}>深入了解 SLA 服務 →</Link>
+          </div>
           {loadingServices && <StateMessage variant="loading" />}
           {errorServices && <StateMessage variant="error" />}
           {services && (
